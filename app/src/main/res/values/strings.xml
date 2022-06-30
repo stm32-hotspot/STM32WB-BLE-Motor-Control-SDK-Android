@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">BLE-MCSDK</string>
+    <string name="stop">STOP</string>
+    <string name="ble_status">BLE Status</string>
+    <string name="bluetooth_icon">Bluetooth Icon</string>
+    <string name="dash">&#160;-&#160;</string>
+    <string name="_0">0</string>
+    <string name="disconnect">Disconnect</string>
+    <string name="battery">Battery</string>
+    <string name="spinning_motor">Spinning Motor</string>
+    <string name="set_speed">Set Speed</string>
+    <string name="set_speed1">Set Speed:</string>
+    <string name="get_speed">Get Speed:</string>
+    <string name="min_max">MIN/MAX</string>
+    <string name="_0_rpm">0 RPM</string>
+    <string name="set_min_max_speed">Set MIN/MAX Speed</string>
+    <string name="difference">Difference:</string>
+    <string name="alert_icon">Alert Icon</string>
+    <string name="min_max_speed">Min/Max Speed</string>
+    <string name="_20000">-20000</string>
+    <string name="mcsdk_filter">MCSDK Filter</string>
+    <string name="rpm">&#160;RPM</string>
+    <string name="search">Search</string>
+    <string name="log">Log</string>
+    <string name="auto_scroll">Auto Scroll</string>
+    <string name="reset_boards">Reset boards?</string>
+    <string name="bluetooth">Bluetooth</string>
+    <string name="motor">Motor</string>
+    <string name="cancel">Cancel</string>
+    <string name="st_logo">ST Logo</string>
+    <string name="crc_enabled">CRC Enabled</string>
+</resources>

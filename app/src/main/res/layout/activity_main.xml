@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="main"
+            type="com.stm.ble_mcsdk.activity.main.MainActivity" />
+        <variable
+            name="vm"
+            type="com.stm.ble_mcsdk.MCSDKViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".activity.main.MainActivity">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/st_dark_blue"
+            android:theme="@style/Theme.ActionBar"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="BLE MCSDK">
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <ImageView
+            android:id="@+id/minMaxImage"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="15dp"
+            android:contentDescription="@string/min_max_speed"
+            android:onClick="@{() -> main.onMinMaxClick()}"
+            android:src="@drawable/ic_speed"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+        <ImageView
+            android:id="@+id/bellImage"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="15dp"
+            android:contentDescription="@string/alert_icon"
+            android:src="@drawable/ic_alert_icon"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+        <ImageView
+            android:id="@+id/motorImage"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:contentDescription="@string/spinning_motor"
+            android:onClick="@{() -> main.onMotorClick()}"
+            android:src="@drawable/ic_settings"
+            app:layout_constraintVertical_bias="0.35"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintBottom_toTopOf="@+id/getSpeedLabel"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+        <TextView
+            android:id="@+id/getSpeedLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="@string/get_speed"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/getSpeedText"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/motorImage" />
+
+        <TextView
+            android:id="@+id/getSpeedText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{Integer.toString(vm.getSpeed) + ` RPM`}"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/speedSlider"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/getSpeedLabel" />
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/speedSlider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="40dp"
+            android:layout_marginTop="10dp"
+            android:value="@{vm.setSpeed}"
+            android:valueFrom="@{vm.maxSpeed * -1}"
+            android:valueTo="@{vm.maxSpeed}"
+            app:labelBehavior="gone"
+            app:layout_constraintBottom_toTopOf="@+id/maxText"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/getSpeedText"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/minText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{Integer.toString(vm.maxSpeed * -1)}"
+            android:textSize="18sp"
+            app:layout_constraintTop_toBottomOf="@+id/speedSlider"
+            app:layout_constraintLeft_toLeftOf="@+id/speedSlider" />
+
+        <TextView
+            android:id="@+id/maxText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{Integer.toString(vm.maxSpeed)}"
+            android:textSize="18sp"
+            app:layout_constraintTop_toBottomOf="@+id/speedSlider"
+            app:layout_constraintBottom_toTopOf="@+id/setSpeedLabel"
+            app:layout_constraintRight_toRightOf="@+id/speedSlider" />
+
+        <TextView
+            android:id="@+id/setSpeedLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="@string/set_speed1"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/setSpeedText"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/maxText" />
+
+        <TextView
+            android:id="@+id/setSpeedText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> main.onSetSpeedClick()}"
+            android:text="@{Integer.toString(vm.setSpeed) + ` RPM`}"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/differenceLabel"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/setSpeedLabel" />
+
+        <TextView
+            android:id="@+id/differenceLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/difference"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/differenceText"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/setSpeedText" />
+
+        <TextView
+            android:id="@+id/differenceText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{Math.abs(vm.setSpeed - vm.getSpeed) + ` RPM`}"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/crcCheckBox"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/differenceLabel" />
+
+        <CheckBox
+            android:id="@+id/crcCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/crc_enabled"
+            android:onClick="@{() -> vm.toggleCRC(crcCheckBox)}"
+            android:layout_marginTop="10dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/differenceText"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <ImageView
+            android:id="@+id/batteryImage"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="15dp"
+            android:contentDescription="@string/battery"
+            android:src="@drawable/ic_battery"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+        <TextView
+            android:id="@+id/batteryText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:text=""
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/batteryImage"
+            app:layout_constraintTop_toTopOf="@+id/batteryImage" />
+
+        <ImageView
+            android:id="@+id/stLogo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/st_logo"
+            android:layout_marginBottom="5dp"
+            android:onClick="@{() -> main.onSTLogoClick()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:contentDescription="@string/st_logo" />
+
+        <TextView
+            android:id="@+id/statusText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:text="@string/ble_status"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
